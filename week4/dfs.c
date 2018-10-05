@@ -33,97 +33,51 @@ Popped = 3 4 1 5 2 0 9 8 7 6
 
 */
 
-#include <stdio.h>
-#include <stdlib.h>
-
-int a[100][100];			//adjacency matrix
-int popped[100];
-int k = 0;					//index for popped array
-
-void dfs(int n, int* visited, int i){
-
-	//mark this vertex as visited and print it
-	visited[i] = 1;				
-	printf("%d ", i);
-
-	for (int j = 0; j < n; ++j)				// check all vertices adjacent to i
-	{
-		if(!visited[j] && a[i][j] == 1){
-			dfs(n,visited,j);
-		}
-	}
-
-	// after DFS for all adjacent vertices of i
-	// is complete (i.e, end of dfs function) 
-	// then it is popped from the stack
-	popped[k++] = i;			
-}
-
-
-int main(int argc, char const *argv[])
+#include<stdio.h>
+#include<stdlib.h>
+int a[100][100]={0},visited[100],k=0,pop[100];
+int n,m;
+void DFS(int i)
 {
-
-	int src,dest;
-
-	int n;
-	
-	printf("Enter number of vertices\n");
-	scanf("%d", &n);
-	
-	for (int i = 0; i < n; ++i)
-	{
-		for (int j = 0; j < n; ++j)
-		{
-			a[i][j] = 0;
-		}
-	}
-
-	
-	printf("Enter 2 vertices (-1 -1 to break) \n");
-	
-	while(1){
-		scanf("%d %d", &src, &dest);
-		
-		if(src == -1 && dest == -1)
-			break;
-		
-		a[src][dest] = 1;
-
-	}
-
-
-	for (int i = 0; i < n; ++i)
-	{
-		for (int j = 0; j < n; ++j)
-		{
-			printf("%d ", a[i][j]);
-		}
-
-		printf("\n");
-	}
-
-	int visited[n];			
-
-	for (int i = 0; i < n; ++i)
-	{
-		visited[i] = 0;
-	}
-
-	printf("Pushed order is \n");
-
-	for (int i = 0; i < n; ++i)
-	{
-		if(!visited[i])
-			dfs(n,visited,i);		//call dfs for every vertex in graph
-	}
-
-	printf("\nPopped order is \n");
-
-	for (int i = 0; i < k; ++i)
-	{
-		printf("%d ", popped[i]);
-	}
-
-	
-	return 0;
+	printf("%d",i+1);
+	visited[i]=1;
+	for(int j=0;j<n;j++)
+	    if(!visited[j]&&a[i][j]==1)
+	          DFS(j);
+	pop[k]=i+1;
+	k++;
+}
+int main()
+{
+	int x,y;
+	printf("enter the no of vertices\n");
+	scanf("%d",&n);
+	printf("enter the edges\n");
+	scanf("%d",&m);
+    for(int i=0;i<m;i++)
+    {
+       scanf("%d  %d",&x,&y);
+       a[x-1][y-1]=1;
+    }
+    printf("\nThe adjacency matrix is:\n");
+    for(int i=0;i<n;i++)
+    {
+    	for(int j=0;j<n;j++)
+    	{
+    	     printf("%d",a[i][j]);
+    	}
+    	printf("\n");
+    }
+   for(int i=0;i<n;i++)
+   {
+       visited[i]=0;
+   }
+   printf("push order\n");
+   DFS(0);
+   printf("\npop order\n");
+   for(int i=0;i<k;i++)
+   {
+   	  printf("%d",pop[i]);
+   }
+   printf("\n");
 }
