@@ -27,7 +27,6 @@ void createHST(Node hst[],int n )
     printf("enter strings\n");
     for(int i=0;i<n;i++)
     {
-        //     gets(s);
         scanf("%s",s);
 
         hst[hashFunction(s)]=insertLast(hst[hashFunction(s)],s);
@@ -52,14 +51,6 @@ int search(Node hst[],char key[])
 }
 void main()
 {
-    /*
-       Node head=NULL;
-       head=insertLast(head,"LUG");
-       head=insertLast(head,"&");
-       head=insertLast(head,"MIST");
-       head=insertLast(head,">");
-       head=insertLast(head,"IECSE");
-       */ 
     int n; 
     printf("enter no. of strings\n");
     scanf("%d",&n);

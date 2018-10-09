@@ -1,3 +1,7 @@
+/*
+ * implementation of Horspool algorithm code with only small alphabetic characters
+ */
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -59,9 +63,15 @@ int horspool(char s[],char p[],int sh[])
 
 void main()
 {
-    char s[]="bess knew about baobab";
-    char p[]="baobab"; 
+    
+    char s[256]; 
+    char p[256]; 
+    printf("enter text \n");
+    gets(s); 
+    printf("enter pattern \n");
+    gets(p); 
     int sh[26]; 
+    printf("shift table generated\n"); 
     genST(26,sh,p);
     displayInt(sh,26); 
     int x=horspool(s,p,sh);
@@ -69,7 +79,6 @@ void main()
         printf("not found\n");
     else
         printf("found at pos %d\n",x); 
-
 
     printf("opcount is  %d\n",opcount); 
 
